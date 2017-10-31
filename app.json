@@ -1,0 +1,8 @@
+{
+	"name": "burger",
+	"description": "deploying burgers to git",
+	"repository": "https://github.com/hirabakhsh/burger.git",
+	"logo": "",
+	"keywords": ["node", "express", "static"],
+	"image": ""
+}
