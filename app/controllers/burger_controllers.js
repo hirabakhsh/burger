@@ -1,31 +1,28 @@
-var burger = require("../models/burger.js");
+var express = require('express');
+var router = express.Router();
+var burger = require('../models/burger.js');
 
-module.exports = function(app) {
-  
-  app.get('/', function(req, res) {
+router.get('/', function(request, response) {
     burger.all(function(data) {
-      res.render("index", {burger: data});
+        var hbsObject = {
+            burgers: data
+        };
+        console.log(hbsObject);
+        response.render('index', hbsObject);
     });
+});
 
-  });
+router.post('/burgers', function(request, response) {
+    burger.insert(request.body.type, function() {
+        response.redirect('/');
+    });
+});
 
-  app.post('/api/1.0/create', function(req, res) {
-    burger.create(req.body.burger_item);
+router.post('/burgers/:id', function(request, response) {
+    burger.update(request.params.id, function() {
+        response.redirect('/');
+    });
+});
 
-  });
 
-  app.put('/api/1.0/update', function(req, res) {
-    burger.update(req.body.burger_id);
-
-  });
-
-  app.put('/api/1.0/delete', function(req, res) {
-    console.log(req.body.burger_id);
-    burger.delete(req.body.burger_id);
-  })
-
-  app.get('/mockup', function(req, res) {
-    res.render('mockup');
-  })
-
-};
+module.exports = router;
