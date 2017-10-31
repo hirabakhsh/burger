@@ -3,6 +3,10 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var path = require("path");
+var handlebars = require("express-handlebars").create(
+
+	)
 
 // Sets up the Express App
 // =============================================================
@@ -19,8 +23,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("app/public"));
 
 // Routes
-// =============================================================
+
 require("./app/routes/api-routes.js")(app);
+require("./app/routes/html-routes.js")(app);
 
 // Starts the server to begin listening
 // =============================================================

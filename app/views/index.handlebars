@@ -1,0 +1,48 @@
+<h1>Eat-Da-Burger!</h1>
+
+<h4>Here are your burger orders! If your burger is a button, <br>
+you need to devour it! Once it's devoured it'll be shown as plain text</h4>
+
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col s6">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+            <div>
+              <form action="/burgers/{{this.id}}" method="POST">
+                <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
+              </form>
+            </div>
+          {{/unless}}
+        {{/each}}
+      </div>
+
+      <div class="col s6">
+        {{#each burgers}}
+          {{#if this.devoured}}
+            <div class='burgerEaten'>
+              <div>
+                {{this.burger_name}}
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</main>
+
+<h2>Place an Order</h2>
+
+<h4> Tell us what kind of burger you want! <br>
+We'll add it to your order above so you can eat it!</h4>
+
+<div class="row">
+  <div class="col s12">
+    <form action="/burgers" method="POST">
+      <input type="text" id="name" name="type" placeholder="What kind of burger are you eating??">
+      <button type="submit" class="addBurgerButton">Add The Burger</button>
+    </form>
+  </div>
+</div>
